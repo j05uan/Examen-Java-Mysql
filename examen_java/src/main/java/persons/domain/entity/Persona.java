@@ -4,7 +4,7 @@ import ciudad.domain.entity.Ciudad;
 import genero.domain.entity.Genero;
 
 public class Persona {
-    private int id;
+    private Long id;
     private String nombre;
     private String apellido;
     private String direccion;
@@ -14,7 +14,7 @@ public class Persona {
     private Ciudad ciudad;
     public Persona() {
     }
-    public Persona(int id, String nombre, String apellido, String direccion, int edad, String correoElectronico,
+    public Persona(Long id, String nombre, String apellido, String direccion, int edad, String correoElectronico,
             Genero genero, Ciudad ciudad) {
         this.id = id;
         this.nombre = nombre;
@@ -25,10 +25,10 @@ public class Persona {
         this.genero = genero;
         this.ciudad = ciudad;
     }
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNombre() {

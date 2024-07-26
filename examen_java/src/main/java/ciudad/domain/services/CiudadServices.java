@@ -6,4 +6,5 @@ import ciudad.domain.entity.Ciudad;
 
 public interface CiudadServices {
     List<Ciudad> obtenerTodasLasCiudades();
+    Ciudad encontrarPorId(Long id);
 }

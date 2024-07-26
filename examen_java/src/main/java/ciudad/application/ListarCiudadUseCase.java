@@ -5,15 +5,15 @@ import java.util.List;
 import ciudad.domain.entity.Ciudad;
 import ciudad.domain.services.CiudadServices;
 
-public class CiudadUseCase {
+public class ListarCiudadUseCase {
 
     private final CiudadServices ciudadServices;
 
-    public CiudadUseCase(CiudadServices ciudadServices) {
+    public ListarCiudadUseCase(CiudadServices ciudadServices) {
         this.ciudadServices = ciudadServices;
     }
 
-    public List<Ciudad> obtenerTodasLasCiudade(){
+    public List<Ciudad> execute (){
        return ciudadServices.obtenerTodasLasCiudades();
     }
 
