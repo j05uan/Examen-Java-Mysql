@@ -1,5 +1,7 @@
 package region.domain.entity;
 
+import pais.domain.entity.Pais;
+
 public class Region {
     private int id;
     private String nombre;
