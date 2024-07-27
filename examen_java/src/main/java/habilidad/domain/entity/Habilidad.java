@@ -9,6 +9,10 @@ public class Habilidad {
         this.nombre = nombre;
     }
 
+    public Habilidad() {
+        
+    }
+
     public Long getId() {
         return id;
     }

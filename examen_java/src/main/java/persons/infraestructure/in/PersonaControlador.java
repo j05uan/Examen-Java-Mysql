@@ -1,5 +1,6 @@
 package persons.infraestructure.in;
 
+import java.util.List;
 import java.util.Scanner;
 
 import ciudad.domain.entity.Ciudad;
@@ -11,10 +12,13 @@ import persons.application.CreatePersonUseCase;
 import persons.application.EliminarPersonaUSeCase;
 import persons.domain.entity.Persona;
 import persons.domain.services.PersonaServices;
+import persons.infraestructure.out.PersonaRepository;
+import utils.*;
 
 public class PersonaControlador {
     private final Scanner scanner = new Scanner(System.in);
     private final PersonaServices personaServices;
+    private final PersonaRepository personaRepository;
     private final EliminarPersonaUSeCase eliminarPersona;
     private final ActualizarPersonaUSeCase actualizarPersonaUSeCase;
     private final CreatePersonUseCase createPersonUseCase;
@@ -26,6 +30,7 @@ public class PersonaControlador {
             ActualizarPersonaUSeCase actualizarPersonaUSeCase, CreatePersonUseCase createPersonUseCase,
             GeneroRepository generoRepository, CiudadRepository ciudadRepository) {
         this.personaServices = personaServices;
+        this.personaRepository = new PersonaRepository();
         this.eliminarPersona = eliminarPersona;
         this.actualizarPersonaUSeCase = actualizarPersonaUSeCase;
         this.createPersonUseCase = createPersonUseCase;
@@ -101,8 +106,40 @@ public class PersonaControlador {
         System.out.println("Ingrese el correo electronico");
         String email = scanner.nextLine();
         persona.setCorreoElectronico(email);
-        Genero genero = new GeneroRepository().obtenerTodosLGeneros();
+        List<Genero> generos = new GeneroRepository().obtenerTodosLGeneros();
+        System.out.println("Seleccione el genero");
+        mostrarGenero(generos);
+        int opcionGenero = Consola.optionValidation("Ingrese el numero del genero", 1, generos.size());
+        Genero generoSeleccionado = generos.get(opcionGenero -1);
+        List<Ciudad> ciudades = new CiudadRepository().obtenerTodasLasCiudades();
+        System.out.println("Selecione la ciudad");
+        mostrarCiudad(ciudades);
+        int opcionCiudad =  Consola.optionValidation("Ingrese el numero de la ciudad");
+        Ciudad ciudadSeleccionada = ciudades.get(opcionCiudad -1 );
 
+        persona.setGenero(generoSeleccionado);
+        persona.setCiudad(ciudadSeleccionada);
+
+        personaRepository.crearPersona(persona);
+
+        System.out.println("Persona Creada con exito");
+
+    }
+
+    
+
+
+
+
+    private void mostrarGenero(List<Genero> generos) {
+        for (int i = 0; i < generos.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, generos.get(i).getName());
+        }
+    }
+    private void mostrarCiudad(List<Ciudad> ciudades) {
+        for (int i = 0; i < ciudades.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, ciudades.get(i).getNombre());
+        }
     }
 
 }
